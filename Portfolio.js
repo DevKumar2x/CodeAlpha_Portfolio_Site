@@ -1,7 +1,8 @@
-// Simple fade-in animation on scroll
+// Simple fade-in animation on scroll + mobile nav toggle
 const sections = document.querySelectorAll(".section");
 
-window.addEventListener("scroll", () => {
+function handleScroll() {
+  if (!sections) return;
   sections.forEach(section => {
     const top = section.getBoundingClientRect().top;
     const windowHeight = window.innerHeight;
@@ -11,7 +12,9 @@ window.addEventListener("scroll", () => {
       section.style.transform = "translateY(0)";
     }
   });
-});
+}
+
+window.addEventListener("scroll", handleScroll, { passive: true });
 
 // Initial state
 sections.forEach(section => {
@@ -19,3 +22,17 @@ sections.forEach(section => {
   section.style.transform = "translateY(40px)";
   section.style.transition = "0.6s ease";
 });
+
+// Run once in case some sections are already visible
+handleScroll();
+
+// Mobile nav toggle
+const navToggle = document.querySelector('.nav-toggle');
+const header = document.querySelector('header');
+if (navToggle && header) {
+  navToggle.addEventListener('click', () => {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!expanded));
+    header.classList.toggle('nav-open');
+  });
+}

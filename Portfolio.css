@@ -1,7 +1,13 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+  --header-height: 70px;
+  --accent: #00a8ff;
+  --bg-dark: #111;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -12,24 +18,37 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
   color: #333;
+  padding-top: var(--header-height);
 }
 
 /* Navbar */
-header {
-  position: fixed;
-  width: 100%;
-  background: #111;
-  z-index: 1000;
-}
-
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--bg-dark);
+  z-index: 1000;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 0 20px;
 }
 
 .logo {
-  color: #00a8ff;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .nav-links {
@@ -41,16 +60,18 @@ header {
 .nav-links a {
   color: white;
   text-decoration: none;
-  transition: 0.3s;
+  transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
-  color: #00a8ff;
+.nav-links a:hover,
+.nav-links a:focus {
+  color: var(--accent);
+  outline: none;
 }
 
 /* Hero */
 .hero {
-  height: 100vh;
+  height: calc(100vh - var(--header-height));
   background: linear-gradient(to right, #000, #222);
   color: white;
   display: flex;
@@ -58,20 +79,21 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 20px;
 }
 
 .hero span {
-  color: #00a8ff;
+  color: var(--accent);
 }
 
 .btn {
   margin-top: 20px;
   padding: 10px 20px;
-  background: #00a8ff;
+  background: var(--accent);
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
 
 .btn:hover {
@@ -102,7 +124,7 @@ header {
 
 .skills span {
   padding: 10px 15px;
-  background: #111;
+  background: var(--bg-dark);
   color: white;
   border-radius: 20px;
 }
@@ -118,7 +140,7 @@ header {
   padding: 20px;
   border-radius: 10px;
   background: white;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
 }
 
@@ -128,15 +150,35 @@ header {
 
 /* Footer */
 footer {
-  background: #111;
+  background: var(--bg-dark);
   color: white;
   text-align: center;
   padding: 15px;
 }
 
-/* Responsive */
+/* Responsive: mobile nav */
 @media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
   .nav-links {
     display: none;
+  }
+
+  header.nav-open .nav-links,
+  .nav-open .nav-links {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    background: var(--bg-dark);
+    flex-direction: column;
+    padding: 10px 12px;
+    width: 220px;
+    gap: 10px;
   }
 }
