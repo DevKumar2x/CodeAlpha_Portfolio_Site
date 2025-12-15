@@ -19,3 +19,4 @@ sections.forEach(section => {
   section.style.transform = "translateY(40px)";
   section.style.transition = "0.6s ease";
 });
+
