@@ -125,3 +125,18 @@ header {
 .project-card:hover {
   transform: translateY(-10px);
 }
+
+/* Footer */
+footer {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
